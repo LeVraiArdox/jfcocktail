@@ -13,10 +13,15 @@ export  default function Header({ name }) {
 };
 
 const styles = StyleSheet.create({
+    container: {
+        width:  '100%',
+        height: '20%',
+        backgroundColor: '#fff',
+        paddingTop: 20, 
+    },
     textHeader: {
         fontSize: 24,
         color: "#000",
-        paddingBottom: 50,
         alignSelf: 'center',
         fontWeight: 'bold'
     },

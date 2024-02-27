@@ -11,11 +11,11 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Header name={name} />
+      <Button theme='favourite' label="Boisson préférée" />
       <Button theme='primary' label="Boisson 1" />
       <Button theme='primary' label="Boisson 2" />
       <Button theme='primary' label="Boisson 3" />
       <Button theme='primary' label="Boisson 4" />
-      <Button theme='primary' label="Boisson 5" />
       <StatusBar style="auto" />
     </View>
   );
@@ -24,7 +24,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fffffe',
+    backgroundColor: '#d4d4d4',
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -1,18 +1,6 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 
-function requestToNode(data) {
-  const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  };
-
-  fetch("http://localhost:1880/endpoint", requestOptions)
-    .then((response) => response.json())
-    .then((data) => this.setState({ postId: data.id }))
-    .catch((error) => console.error("Error:", error));
-}
+import requestToNode from "./request";
 
 export default function Button({ label, theme, onPress }) {
   if (theme === "primary") {
@@ -21,15 +9,39 @@ export default function Button({ label, theme, onPress }) {
         style={[
           styles.buttonContainer,
           {
-            borderWidth: 4,
+            borderWidth: 2,
             borderColor: "#4287f5",
-            borderRadius: 18,
-          } /* #4287f5 */,
+            borderRadius: 15,
+          },
         ]}
       >
         <Pressable
           style={[styles.button, { backgroundColor: "#fff" }]}
-          onPress={requestToNode(label)}
+          onPress={() => requestToNode(label)}
+        >
+          <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
+            {label}
+          </Text>
+        </Pressable>
+      </View>
+    );
+  }
+
+  if (theme === "favourite") {
+    return (
+      <View
+        style={[
+          styles.buttonContainer,
+          {
+            borderWidth: 2,
+            borderColor: "#e69509",
+            borderRadius: 15,
+          },
+        ]}
+      >
+        <Pressable
+          style={[styles.button, { backgroundColor: "#fff" }]}
+          onPress={() => requestToNode(label)}
         >
           <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
             {label}
@@ -41,7 +53,7 @@ export default function Button({ label, theme, onPress }) {
 
   return (
     <View style={styles.buttonContainer}>
-      <Pressable style={styles.button} onPress={requestToNode(label)}>
+      <Pressable style={styles.button} onPress={() => requestToNode(label)}>
         <Text style={styles.buttonLabel}>{label}</Text>
       </Pressable>
     </View>
@@ -56,7 +68,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 3,
-    marginBottom: 20,
+    marginTop: 20,
     shadowOpacity: 0.2,
     shadowColor: "#171717",
     shadowOffset: { width: 3, height: 3 },
