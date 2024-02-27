@@ -1,10 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
+
+import Button from './components/buttons';
+import Header from './components/header';
 
 export default function App() {
+  const defaultName = 'personne inconnue';
+  let name = defaultName;
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Header name={name} />
+      <Button theme='primary' label="Boisson 1" />
+      <Button theme='primary' label="Boisson 2" />
+      <Button theme='primary' label="Boisson 3" />
+      <Button theme='primary' label="Boisson 4" />
+      <Button theme='primary' label="Boisson 5" />
       <StatusBar style="auto" />
     </View>
   );
@@ -13,7 +24,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fffffe',
     alignItems: 'center',
     justifyContent: 'center',
   },
