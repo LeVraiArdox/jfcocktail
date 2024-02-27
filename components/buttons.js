@@ -1,8 +1,25 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
 
-import requestToNode from "./request";
 
 export default function Button({ label, theme, onPress }) {
+
+  const requestToNode = async (label) => {
+    try {
+      const response = await fetch("http://localhost:1880/endpoint", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ data: label }),
+      });
+      if (response.ok) {
+        alert("Sended successfully!");
+      } else {
+        alert("An error happened!");
+      }
+    } catch (error) {
+      alert("Error while sending message:", error);
+    }
+  };
+
   if (theme === "primary") {
     return (
       <View
@@ -51,13 +68,6 @@ export default function Button({ label, theme, onPress }) {
     );
   }
 
-  return (
-    <View style={styles.buttonContainer}>
-      <Pressable style={styles.button} onPress={() => requestToNode(label)}>
-        <Text style={styles.buttonLabel}>{label}</Text>
-      </Pressable>
-    </View>
-  );
 }
 
 const styles = StyleSheet.create({
