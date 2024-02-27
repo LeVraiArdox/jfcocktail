@@ -1,22 +1,22 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
 
 
-export default function Button({ label, theme, onPress }) {
+export default function Button({ label, theme }) {
 
   const requestToNode = async (label) => {
     try {
-      const response = await fetch("http://localhost:1880/endpoint", {
+      const response = await fetch("http://127.0.0.1:1880/endpoint", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data: label }),
       });
       if (response.ok) {
-        alert("Sended successfully!");
+        alert("Succès!");
       } else {
-        alert("An error happened!");
+        alert("Une erreur est survenue!");
       }
     } catch (error) {
-      alert("Error while sending message:", error);
+      alert(`Une erreur est survenue: ${error}`);
     }
   };
 
