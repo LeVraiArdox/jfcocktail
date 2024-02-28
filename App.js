@@ -5,7 +5,7 @@ import Button from './components/buttons';
 import Header from './components/header';
 
 export default function App() {
-  const defaultName = 'personne inconnue';
+  const defaultName = 'Gauxd';
   let name = defaultName;
 
   return (

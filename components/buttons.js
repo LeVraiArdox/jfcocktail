@@ -1,6 +1,11 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
 
+import recieveData from "./recieveData";
+
 export default function Button({ label, theme }) {
+
+  let used = recieveData();
+
   const requestToNode = async (label) => {
     try {
       const response = await fetch("http://localhost:1880/endpoint", {
@@ -18,52 +23,104 @@ export default function Button({ label, theme }) {
     }
   };
 
-  if (theme === "primary") {
-    return (
-      <View
-        style={[
-          styles.buttonContainer,
-          {
-            borderWidth: 2,
-            borderColor: "#4287f5",
-            borderRadius: 15,
-          },
-        ]}
-      >
-        <Pressable
-          style={[styles.button, { backgroundColor: "#fff" }]}
-          onPress={() => requestToNode(label)}
-        >
-          <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
-            {label}
-          </Text>
-        </Pressable>
-      </View>
-    );
-  }
+  if (used !== true) {
 
-  if (theme === "favourite") {
-    return (
-      <View
-        style={[
-          styles.buttonContainer,
-          {
-            borderWidth: 2,
-            borderColor: "#e69509",
-            borderRadius: 15,
-          },
-        ]}
-      >
-        <Pressable
-          style={[styles.button, { backgroundColor: "#fff" }]}
-          onPress={() => requestToNode(label)}
+    if (theme === "primary") {
+      return (
+        <View
+          style={[
+            styles.buttonContainer,
+            {
+              borderWidth: 2,
+              borderColor: "#4287f5",
+              borderRadius: 15,
+            },
+          ]}
         >
-          <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
-            {label}
-          </Text>
-        </Pressable>
-      </View>
-    );
+          <Pressable
+            style={[styles.button, { backgroundColor: "#fff" }]}
+            onPress={() => requestToNode(label)}
+          >
+            <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
+              {label}
+            </Text>
+          </Pressable>
+        </View>
+      );
+    }
+
+    if (theme === "favourite") {
+      return (
+        <View
+          style={[
+            styles.buttonContainer,
+            {
+              borderWidth: 2,
+              borderColor: "#e69509",
+              borderRadius: 15,
+            },
+          ]}
+        >
+          <Pressable
+            style={[styles.button, { backgroundColor: "#fff" }]}
+            onPress={() => requestToNode(label)}
+          >
+            <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
+              {label}
+            </Text>
+          </Pressable>
+        </View>
+      );
+    }
+  } else {
+
+    if (theme === "primary") {
+      return (
+        <View
+          style={[
+            styles.buttonContainer,
+            {
+              borderWidth: 2,
+              borderColor: "#4287f5",
+              borderRadius: 15,
+            },
+          ]}
+        >
+          <Pressable
+            style={[styles.button, { backgroundColor: "#fff" }]}
+            onPress={() => alert("Une action est déja en cours")}
+          >
+            <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
+              {label}
+            </Text>
+          </Pressable>
+        </View>
+      );
+    }
+
+    if (theme === "favourite") {
+      return (
+        <View
+          style={[
+            styles.buttonContainer,
+            {
+              borderWidth: 2,
+              borderColor: "#e69509",
+              borderRadius: 15,
+            },
+          ]}
+        >
+          <Pressable
+            style={[styles.button, { backgroundColor: "#fff" }]}
+            onPress={() => alert("Une action est déja en cours")}
+          >
+            <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
+              {label}
+            </Text>
+          </Pressable>
+        </View>
+      );
+    }
   }
 }
 
