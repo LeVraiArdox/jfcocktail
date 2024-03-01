@@ -1,10 +1,7 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
 
-import recieveData from "./recieveData";
 
 export default function Button({ label, theme }) {
-
-  let used = recieveData();
 
   const requestToNode = async (label) => {
     try {
@@ -13,16 +10,21 @@ export default function Button({ label, theme }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data: label }),
       });
+  
       if (response.ok) {
-        alert("Succès!");
+        const data = await response.json();
+        alert(JSON.stringify(data));
+$        
       } else {
-        alert("Une erreur est survenue!");
+        const errorData = await response.json();
+        alert("Une erreur est survenue! Here's the error data: " + JSON.stringify(errorData));
       }
     } catch (error) {
       alert(`Une erreur est survenue: ${error}`);
     }
   };
 
+  let used = false;
   if (used !== true) {
 
     if (theme === "primary") {
@@ -57,6 +59,29 @@ export default function Button({ label, theme }) {
             {
               borderWidth: 2,
               borderColor: "#e69509",
+              borderRadius: 15,
+            },
+          ]}
+        >
+          <Pressable
+            style={[styles.button, { backgroundColor: "#fff" }]}
+            onPress={() => requestToNode(label)}
+          >
+            <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
+              {label}
+            </Text>
+          </Pressable>
+        </View>
+      );
+    }
+    if (theme === "recommended") {
+      return (
+        <View
+          style={[
+            styles.buttonContainer,
+            {
+              borderWidth: 2,
+              borderColor: "#46ad2a",
               borderRadius: 15,
             },
           ]}
