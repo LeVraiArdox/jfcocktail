@@ -6,15 +6,25 @@ This is using the *Expo React* framework.
 ## use this app
 
 You will first need to install expo
-```npm install expo```
+
+```$ npm install expo```
+
 once this is done, start a new expo project
-```npx create-expo-app jfcocktail```
+
+```$ npx create-expo-app jfcocktail```
+
 now clone the repo
-```git clone https://github.com/levraiardox/jfcocktail jfcocktail..bak/```
+
+```$ git clone https://github.com/levraiardox/jfcocktail jfcocktail..bak/```
+
 this cloned the repo into `jfcocktail.bak` directory. now copy all into the `jfcocktail` folder
-```cp jfcocktail.bak/* jfcocktail/```
+
+```$ cp jfcocktail.bak/* jfcocktail/```
 
 the project is ready. start the live server
-```npx expo start```
+
+```$ npx expo start```
+
 or build the app
-```npx expo run```
+
+```& npx expo run```
