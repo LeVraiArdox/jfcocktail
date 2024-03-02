@@ -1,11 +1,10 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
-
+import react from "react";
 
 export default function Button({ label, theme }) {
-
   const requestToNode = async (label) => {
     try {
-      const response = await fetch("", {
+      const response = await fetch("http://localhost:1880/endpoint", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data: label }),
@@ -13,20 +12,24 @@ export default function Button({ label, theme }) {
   
       if (response.ok) {
         const data = await response.json();
-        alert(JSON.stringify(data));
-$        
+        if (data !== null) {
+          alert("Votre boisson est prete");
+          setUsed(false)
+        } else {
+          alert("aucune réponse de la part du serveur");
+        }
       } else {
         const errorData = await response.json();
-        alert("Une erreur est survenue! Here's the error data: " + JSON.stringify(errorData));
+        alert("Une erreur est survenue: " + JSON.stringify(errorData));
       }
     } catch (error) {
       alert(`Une erreur est survenue: ${error}`);
     }
   };
+  
+  const [used, setUsed] = react.useState(false);
 
-  let used = false;
   if (used !== true) {
-
     if (theme === "primary") {
       return (
         <View
@@ -41,7 +44,7 @@ $
         >
           <Pressable
             style={[styles.button, { backgroundColor: "#fff" }]}
-            onPress={() => requestToNode(label)}
+            onPress={() => requestToNode(label) && setUsed(true)}
           >
             <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
               {label}
@@ -65,7 +68,7 @@ $
         >
           <Pressable
             style={[styles.button, { backgroundColor: "#fff" }]}
-            onPress={() => requestToNode(label)}
+            onPress={() => requestToNode(label) && setUsed(true)}
           >
             <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
               {label}
@@ -88,7 +91,7 @@ $
         >
           <Pressable
             style={[styles.button, { backgroundColor: "#fff" }]}
-            onPress={() => requestToNode(label)}
+            onPress={() => requestToNode(label) && setUsed(true)}
           >
             <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
               {label}
@@ -98,7 +101,6 @@ $
       );
     }
   } else {
-
     if (theme === "primary") {
       return (
         <View
@@ -131,6 +133,29 @@ $
             {
               borderWidth: 2,
               borderColor: "#e69509",
+              borderRadius: 15,
+            },
+          ]}
+        >
+          <Pressable
+            style={[styles.button, { backgroundColor: "#fff" }]}
+            onPress={() => alert("Une action est déja en cours")}
+          >
+            <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
+              {label}
+            </Text>
+          </Pressable>
+        </View>
+      );
+    }
+    if (theme === "recommended") {
+      return (
+        <View
+          style={[
+            styles.buttonContainer,
+            {
+              borderWidth: 2,
+              borderColor: "#46ad2a",
               borderRadius: 15,
             },
           ]}
