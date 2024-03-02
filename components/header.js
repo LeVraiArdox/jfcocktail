@@ -1,4 +1,5 @@
 import { Text, View, StyleSheet, Pressable } from "react-native";
+
 export default function Header({ name }) {
   var date = new Date();
   var time = date.getHours() + ":" + date.getMinutes();
@@ -14,7 +15,7 @@ export default function Header({ name }) {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: "20%",
+    height: 150,
     backgroundColor: "#fff",
     paddingTop: 20,
   },

@@ -5,7 +5,7 @@ export default function Button({ label, theme }) {
 
   const requestToNode = async (label) => {
     try {
-      const response = await fetch("http://localhost:1880/endpoint", {
+      const response = await fetch("", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data: label }),

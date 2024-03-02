@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, Text, ScrollView, Pressable } from "react-native";
 import { useState } from "react";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 import Button from "./components/buttons";
 import Header from "./components/header";
@@ -13,9 +14,11 @@ export default function App() {
 
   function toggleShowFav() {
     if (isConnected == true) {
-      isConnected == false;
-    } else {
-      isConnected == true;
+      isConnected = false;
+      setShowFav(false);
+    } else if (isConnected == false) {
+      isConnected = true;
+      setShowFav(true);
     }
   }
 
@@ -23,7 +26,7 @@ export default function App() {
     <View style={styles.container}>
       <Header name={name} />
       <Pressable style={styles.loginButton} onPress={() => toggleShowFav()}>
-        Se Connecter
+        <MaterialIcons name="login" size={38} color="#25292e" />
       </Pressable>
       <ScrollView ContentContainerStyle={styles.butContainer}>
         {showFav ? (
@@ -70,7 +73,8 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     padding: 10,
-    backgroundColor: "#F4F4F4",
+    backgroundColor: "#fff",
     alignItems: "center",
+    paddingHorizontal: 200,
   },
 });
