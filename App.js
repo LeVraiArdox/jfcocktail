@@ -35,12 +35,12 @@ export default function App() {
           <View />
         )}
         <Button theme="recommended" label="Boisson recommandée" />
-        <Button theme="primary" label="Boisson 1" />
-        <Button theme="primary" label="Boisson 2" />
-        <Button theme="primary" label="Boisson 3" />
-        <Button theme="primary" label="Boisson 4" />
-        <Button theme="primary" label="Boisson 5" />
-        <Button theme="primary" label="Boisson 6" />
+        <Button theme="primary" label="Sunrise Splash" />
+        <Button theme="primary" label="Tropical Breeze" />
+        <Button theme="primary" label="Apple Pine Delight" />
+        <Button theme="primary" label="Cranberry Sunset" />
+        <Button theme="primary" label="Island Orchard" />
+        <Button theme="primary" label="Tropical Cran-apple" />
       </ScrollView>
       <StatusBar style="auto" />
     </View>

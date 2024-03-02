@@ -9,12 +9,12 @@ export default function Button({ label, theme }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data: label }),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         if (data !== null) {
           alert("Votre boisson est prete");
-          setUsed(false)
+          setUsed(false);
         } else {
           alert("aucune réponse de la part du serveur");
         }
@@ -26,7 +26,22 @@ export default function Button({ label, theme }) {
       alert(`Une erreur est survenue: ${error}`);
     }
   };
-  
+
+  const drinks = [
+    "Sunrise Splash",
+    "Tropical Breeze",
+    "Apple Pine Delight",
+    "Cranberry Sunset",
+    "Island Orchid",
+    "Tropical Cran-Apple",
+  ];
+
+  function getRandomDrink() {
+    const randomIndex = Math.floor(Math.random() * drinks.length);
+    return drinks[randomIndex];
+  }
+  const randomDrink = getRandomDrink();
+
   const [used, setUsed] = react.useState(false);
 
   if (used !== true) {
@@ -94,7 +109,7 @@ export default function Button({ label, theme }) {
             onPress={() => requestToNode(label) && setUsed(true)}
           >
             <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
-              {label}
+              Recommandé: {randomDrink}
             </Text>
           </Pressable>
         </View>
@@ -165,7 +180,7 @@ export default function Button({ label, theme }) {
             onPress={() => alert("Une action est déja en cours")}
           >
             <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
-              {label}
+              Recommandé: {randomDrink}
             </Text>
           </Pressable>
         </View>
