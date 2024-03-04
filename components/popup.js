@@ -7,13 +7,39 @@ import {
   TextInput,
 } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import usersData from "./users.json"; // Assuming users.json is located in the same directory
+import BlurView from 'expo-blur'
 export default function LoginModal({ isVisible, onClose }) {
   const [userName, setUserName] = useState("");
   const [userPass, setUserPass] = useState("");
+  const [users, setUsers] = useState([]);
+  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(usersData);
+      const jsonData = await response.json();
+      setUsers(jsonData);
+    };
+
+    fetchData();
+  }, []);
+
+  const checkCredentials = () => {
+    const user = users.find(
+      (u) => u.username === userName && u.password === userPass
+    );
+
+    if (user !== undefined) {
+      alert("User found");
+    } else {
+      alert("User not found");
+    }
+  };
 
   return (
-    <Modal animationType="slide" transparent={true} visible={isVisible}>
+    <Modal animationType="fade" transparent={true} visible={isVisible}>
       <View style={styles.modalContent}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Login</Text>
@@ -26,17 +52,19 @@ export default function LoginModal({ isVisible, onClose }) {
             style={styles.userCodeInput}
             value={userName}
             onChangeText={setUserName}
-            placeholder="Entrez votre nom d'utilisateur"
-            keyboardType="number-pad"
+            placeholder="Enter your username"
           />
           <TextInput
             style={styles.userCodeInput}
             value={userPass}
             onChangeText={setUserPass}
-            placeholder="Entrez votre mot de passe"
-            keyboardType="number-pad"
+            placeholder="Enter your password"
+            secureTextEntry={true}
           />
         </View>
+        <Pressable style={styles.loginButton} onPress={checkCredentials}>
+          <Text style={styles.loginButtonText}>Login</Text>
+        </Pressable>
       </View>
     </Modal>
   );
@@ -44,44 +72,49 @@ export default function LoginModal({ isVisible, onClose }) {
 
 const styles = StyleSheet.create({
   modalContent: {
+    backgroundColor: "#e2e2e2",
+    padding: 16,
+    borderRadius: 8,
+    width: "90%",
     height: "50%",
-    width: "100%",
-    backgroundColor: "#fff",
-    borderTopRightRadius: 18,
-    borderTopLeftRadius: 18,
-    position: "absolute",
-    bottom: 0,
+    alignSelf: "center",
+    justifyContent: "space-between",
+    top: 0,
+    zIndex: 999,
+    marginTop: 150,
   },
   titleContainer: {
-    height: "13%",
-    width: "100%",
-    backgroundColor: "#c9c9c9",
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
-    paddingHorizontal: 20,
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "space-between",
+    alignItems: "center",
   },
   title: {
-    color: "#000",
-    fontSize: 16,
+    fontSize: 24,
+    fontWeight: "bold",
   },
   pickerContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    paddingVertical: 20,
+    width: "100%",
+    marginTop: 24,
   },
   userCodeInput: {
-    height: 40,
-    width: "90%",
-    backgroundColor: "#ddd",
-    paddingHorizontal: 10,
-    marginLeft: 10,
-    borderRadius: 5,
-    flexDirection: "row",
+    width: "100%",
+    height: 48,
+    backgroundColor: "#F3F3F3",
+    padding: 12,
+    borderRadius: 4,
+    marginBottom: 16,
+  },
+  loginButton: {
+    width: "100%",
+    height: 48,
+    backgroundColor: "#2E71F4",
+    borderRadius: 4,
+    alignItems: "center",
     justifyContent: "center",
+  },
+  loginText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });

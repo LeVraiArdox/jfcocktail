@@ -83,7 +83,9 @@ export default function Button({ label, theme }) {
         >
           <Pressable
             style={[styles.button, { backgroundColor: "#fff" }]}
-            onPress={() => requestToNode(label) && setUsed(true)}
+            onPress={() =>
+              requestToNode(label) && setUsed(true) && alert("Commande envoyée")
+            }
           >
             <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
               {label}
@@ -106,7 +108,9 @@ export default function Button({ label, theme }) {
         >
           <Pressable
             style={[styles.button, { backgroundColor: "#fff" }]}
-            onPress={() => requestToNode(label) && setUsed(true)}
+            onPress={() =>
+              requestToNode(label) && setUsed(true) && alert("Commande envoyée")
+            }
           >
             <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
               Recommandé: {randomDrink}

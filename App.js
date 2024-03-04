@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Text, ScrollView, Pressable } from "react-native";
+import { StyleSheet, View, Text, ScrollView, Pressable, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
@@ -10,7 +10,7 @@ import LoginModal from "./components/popup";
 export default function App() {
   const defaultName = "Gauxd";
   let name = defaultName;
-  let isConnected = true;
+  const [isConnected, setIsConnected] = useState(true);
   const [showFav, setShowFav] = useState(isConnected);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -24,27 +24,18 @@ export default function App() {
   };
 
   function toggleShowFav() {
-    if (isConnected == true) {
-      isConnected = false;
-      setShowFav(false);
-    } else if (isConnected == false) {
-      isConnected = true;
-      setShowFav(true);
-    }
+    setIsConnected(!isConnected);
+    setShowFav(!showFav);
   }
 
   return (
     <View style={styles.container}>
       <Header name={name} />
-      <Pressable style={styles.loginButton} onPress={() => onLogin()}>
-        <MaterialIcons name="login" size={38} color="#25292e" />
-      </Pressable>
-      <ScrollView ContentContainerStyle={styles.butContainer}>
-        {showFav ? (
-          <Button theme="favourite" label="Boisson préférée" />
-        ) : (
-          <View />
-        )}
+      <TouchableOpacity style={styles.loginButton} onPress={onLogin}>
+        <MaterialIcons name="login" size={38} color="#000" />
+      </TouchableOpacity>
+      <ScrollView contentContainerStyle={styles.butContainer}>
+        {showFav && <Button theme="favourite" label="Boisson préférée" />}
         <Button theme="recommended" label="Boisson recommandée" />
         <Button theme="primary" label="Sunrise Splash" />
         <Button theme="primary" label="Tropical Breeze" />
@@ -56,8 +47,8 @@ export default function App() {
       <LoginModal
         isVisible={isModalVisible}
         onClose={onModalClose}
-      ></LoginModal>
-      <StatusBar style="auto" />
+      />
+      <StatusBar style="hidden" translucent />
     </View>
   );
 }
@@ -70,10 +61,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   butContainer: {
-    backgroundColor: "#d4d4d4",
+    backgroundColor: "#ddddd",
     width: "110%",
     alignItems: "center",
-    padding: 50,
+    paddingHorizontal: 15,
   },
   title: {
     fontSize: 30,
@@ -91,6 +82,8 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "#fff",
     alignItems: "center",
-    paddingHorizontal: 200,
+    paddingHorizontal: 50,
+    flexDirection: "row",
+    justifyContent: "center",
   },
 });
