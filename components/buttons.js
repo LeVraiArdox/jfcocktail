@@ -2,8 +2,10 @@ import { StyleSheet, View, Pressable, Text } from "react-native";
 import react from "react";
 
 export default function Button({ label, theme }) {
+
   const requestToNode = async (label) => {
     try {
+      alert("Commande envoyée");
       const response = await fetch("http://localhost:1880/endpoint", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -13,7 +15,7 @@ export default function Button({ label, theme }) {
       if (response.ok) {
         const data = await response.json();
         if (data !== null) {
-          alert("Votre boisson est prete");
+          alert("Votre boisson est prête");
           setUsed(false);
         } else {
           alert("aucune réponse de la part du serveur");
@@ -197,7 +199,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: 320,
     height: 88,
-    marginHorizontal: 20,
     alignItems: "center",
     justifyContent: "center",
     padding: 3,

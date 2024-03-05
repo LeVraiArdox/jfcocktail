@@ -22,7 +22,7 @@ export default function LoginModal({ isVisible, onClose }) {
       const jsonData = await fetchedData.json();
       setUsers(jsonData);
     };
-  
+
     fetchData();
   }, []);
 
@@ -44,8 +44,7 @@ export default function LoginModal({ isVisible, onClose }) {
     }
   };
 
-
-  return isConnected, (
+  return (
     <Modal animationType="fade" transparent={true} visible={isVisible}>
       <View style={styles.modalContent}>
         <View style={styles.titleContainer}>
@@ -78,7 +77,6 @@ export default function LoginModal({ isVisible, onClose }) {
     </Modal>
   );
 }
-
 
 const styles = StyleSheet.create({
   modalContent: {

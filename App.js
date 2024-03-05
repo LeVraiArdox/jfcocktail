@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Text, ScrollView, Pressable } from "react-native";
-import { useState, useEffect } from "react";
+import { StyleSheet, View, ScrollView, Pressable } from "react-native";
+import { useState } from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import LoginModal from "./components/popup";
 
@@ -8,7 +8,7 @@ import Button from "./components/buttons";
 import Header from "./components/header";
 
 export default function App() {
-  const defaultName = "Gauxd";
+  const defaultName = "client inconnu";
   const [showFav, setShowFav] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
