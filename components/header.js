@@ -1,8 +1,11 @@
-import { Text, View, StyleSheet, Pressable } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
+import { isConnected } from "./popup";
 
 export default function Header({ name }) {
   var date = new Date();
   var time = date.getHours() + ":" + date.getMinutes();
+
+  if (userName) name = userName;
 
   return (
     <View style={styles.container}>

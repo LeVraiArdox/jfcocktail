@@ -8,37 +8,44 @@ import {
 } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useState, useEffect } from "react";
-import usersData from "./users.json"; // Assuming users.json is located in the same directory
-import BlurView from 'expo-blur'
+import usersData from "../users.json";
+
 export default function LoginModal({ isVisible, onClose }) {
   const [userName, setUserName] = useState("");
   const [userPass, setUserPass] = useState("");
   const [users, setUsers] = useState([]);
-  
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(usersData);
-      const jsonData = await response.json();
+      const fetchedData = await fetch(usersData);
+      const jsonData = await fetchedData.json();
       setUsers(jsonData);
     };
-
+  
     fetchData();
   }, []);
 
   const checkCredentials = () => {
+    const users = usersData;
     const user = users.find(
       (u) => u.username === userName && u.password === userPass
     );
+    console.log("user: ", user);
+    console.log("username: ", userName);
+    console.log("passwd: ", userPass);
 
     if (user !== undefined) {
       alert("User found");
+      setIsConnected(true);
     } else {
       alert("User not found");
+      setIsConnected(false);
     }
   };
 
-  return (
+
+  return isConnected, (
     <Modal animationType="fade" transparent={true} visible={isVisible}>
       <View style={styles.modalContent}>
         <View style={styles.titleContainer}>
@@ -53,6 +60,7 @@ export default function LoginModal({ isVisible, onClose }) {
             value={userName}
             onChangeText={setUserName}
             placeholder="Enter your username"
+            onSubmitEditing={checkCredentials}
           />
           <TextInput
             style={styles.userCodeInput}
@@ -60,6 +68,7 @@ export default function LoginModal({ isVisible, onClose }) {
             onChangeText={setUserPass}
             placeholder="Enter your password"
             secureTextEntry={true}
+            onSubmitEditing={checkCredentials}
           />
         </View>
         <Pressable style={styles.loginButton} onPress={checkCredentials}>
@@ -69,6 +78,7 @@ export default function LoginModal({ isVisible, onClose }) {
     </Modal>
   );
 }
+
 
 const styles = StyleSheet.create({
   modalContent: {
@@ -112,7 +122,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  loginText: {
+  loginButtonText: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",

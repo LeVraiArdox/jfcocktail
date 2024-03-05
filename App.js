@@ -1,18 +1,15 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Text, ScrollView, Pressable, TouchableOpacity } from "react-native";
-import { useState } from "react";
+import { StyleSheet, View, Text, ScrollView, Pressable } from "react-native";
+import { useState, useEffect } from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import LoginModal from "./components/popup";
 
 import Button from "./components/buttons";
 import Header from "./components/header";
-import LoginModal from "./components/popup";
 
 export default function App() {
   const defaultName = "Gauxd";
-  let name = defaultName;
-  const [isConnected, setIsConnected] = useState(true);
-  const [showFav, setShowFav] = useState(isConnected);
-
+  const [showFav, setShowFav] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const onLogin = () => {
@@ -24,16 +21,15 @@ export default function App() {
   };
 
   function toggleShowFav() {
-    setIsConnected(!isConnected);
     setShowFav(!showFav);
   }
 
   return (
     <View style={styles.container}>
-      <Header name={name} />
-      <TouchableOpacity style={styles.loginButton} onPress={onLogin}>
+      <Header name={defaultName} />
+      <Pressable style={styles.loginButton} onPress={onLogin}>
         <MaterialIcons name="login" size={38} color="#000" />
-      </TouchableOpacity>
+      </Pressable>
       <ScrollView contentContainerStyle={styles.butContainer}>
         {showFav && <Button theme="favourite" label="Boisson préférée" />}
         <Button theme="recommended" label="Boisson recommandée" />
@@ -44,10 +40,7 @@ export default function App() {
         <Button theme="primary" label="Island Orchard" />
         <Button theme="primary" label="Tropical Cran-apple" />
       </ScrollView>
-      <LoginModal
-        isVisible={isModalVisible}
-        onClose={onModalClose}
-      />
+      <LoginModal isVisible={isModalVisible} onClose={onModalClose} />
       <StatusBar style="hidden" translucent />
     </View>
   );
@@ -62,7 +55,7 @@ const styles = StyleSheet.create({
   },
   butContainer: {
     backgroundColor: "#ddddd",
-    width: "110%",
+    width: "100%",
     alignItems: "center",
     paddingHorizontal: 15,
   },
