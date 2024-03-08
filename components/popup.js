@@ -7,14 +7,14 @@ import {
   TextInput,
 } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import usersData from "../users.json";
+import UserContext from "./userContext";
 
 export default function LoginModal({ isVisible, onClose }) {
-  const [userName, setUserName] = useState("");
+  const [userNameInput, setUserNameInput] = useState("");
   const [userPass, setUserPass] = useState("");
-  const [users, setUsers] = useState([]);
-  const [isConnected, setIsConnected] = useState(false);
+  const { setUserName, setIsConnected } = useContext(UserContext)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,15 +29,15 @@ export default function LoginModal({ isVisible, onClose }) {
   const checkCredentials = () => {
     const users = usersData;
     const user = users.find(
-      (u) => u.username === userName && u.password === userPass
+      (u) => u.username === userNameInput && u.password === userPass
     );
     console.log("user: ", user);
-    console.log("username: ", userName);
+    console.log("username: ", userNameInput);
     console.log("passwd: ", userPass);
 
     if (user !== undefined) {
-      alert("User found");
       setIsConnected(true);
+      setUserName(userNameInput);
     } else {
       alert("User not found");
       setIsConnected(false);
@@ -56,8 +56,8 @@ export default function LoginModal({ isVisible, onClose }) {
         <View style={styles.pickerContainer}>
           <TextInput
             style={styles.userCodeInput}
-            value={userName}
-            onChangeText={setUserName}
+            value={setUserNameInput}
+            onChangeText={setUserNameInput}
             placeholder="Enter your username"
             onSubmitEditing={checkCredentials}
           />

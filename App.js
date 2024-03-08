@@ -1,12 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, ScrollView, Pressable } from "react-native";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import LoginModal from "./components/popup";
-
+import { UserProvider } from "./components/userContext";
 import Button from "./components/buttons";
 import Header from "./components/header";
-
+import UserContext from "./components/userContext";
 export default function App() {
   const defaultName = "client inconnu";
   const [showFav, setShowFav] = useState(false);
@@ -25,24 +25,26 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Header name={defaultName} />
-      <Pressable style={styles.loginButton} onPress={onLogin}>
-        <MaterialIcons name="login" size={38} color="#000" />
-      </Pressable>
-      <ScrollView contentContainerStyle={styles.butContainer}>
-        {showFav && <Button theme="favourite" label="Boisson préférée" />}
-        <Button theme="recommended" label="Boisson recommandée" />
-        <Button theme="primary" label="Sunrise Splash" />
-        <Button theme="primary" label="Tropical Breeze" />
-        <Button theme="primary" label="Apple Pine Delight" />
-        <Button theme="primary" label="Cranberry Sunset" />
-        <Button theme="primary" label="Island Orchard" />
-        <Button theme="primary" label="Tropical Cran-apple" />
-      </ScrollView>
-      <LoginModal isVisible={isModalVisible} onClose={onModalClose} />
-      <StatusBar style="hidden" translucent />
-    </View>
+    <UserProvider>
+      <View style={styles.container}>
+        <Header name={defaultName} />
+        <Pressable style={styles.loginButton} onPress={onLogin}>
+          <MaterialIcons name="login" size={38} color="#000" />
+        </Pressable>
+        <ScrollView contentContainerStyle={styles.butContainer}>
+          {showFav && <Button theme="favourite" label="Boisson préférée" />}
+          <Button theme="recommended" label="Boisson recommandée" />
+          <Button theme="primary" label="Sunrise Splash" />
+          <Button theme="primary" label="Tropical Breeze" />
+          <Button theme="primary" label="Apple Pine Delight" />
+          <Button theme="primary" label="Cranberry Sunset" />
+          <Button theme="primary" label="Island Orchard" />
+          <Button theme="primary" label="Tropical Cran-apple" />
+        </ScrollView>
+        <LoginModal isVisible={isModalVisible} onClose={onModalClose} />
+        <StatusBar style="hidden" translucent />
+      </View>
+    </UserProvider>
   );
 }
 

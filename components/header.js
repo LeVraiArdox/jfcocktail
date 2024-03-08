@@ -1,8 +1,13 @@
 import { Text, View, StyleSheet } from "react-native";
+import UserContext from "./userContext";
+import { useContext } from "react";
 
 export default function Header({ name }) {
-  var date = new Date();
-  var time = date.getHours() + ":" + date.getMinutes();
+  let date = new Date();
+  let time = date.getHours() + ":" + date.getMinutes();
+  const {userName} = useContext(UserContext);
+
+  if (userName) name = userName;
 
   return (
     <View style={styles.container}>
