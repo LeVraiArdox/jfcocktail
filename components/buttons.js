@@ -14,7 +14,7 @@ export default function Button({ label, theme }) {
   const requestToNode = async (label) => {
     try {
       alert("Commande envoyée");
-      const response = await fetch("http://193.252.185.148:17001/endpoint", {
+      const response = await fetch("http://localhost:17001/endpoint", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data: label, name }),
