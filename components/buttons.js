@@ -1,15 +1,23 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
-import react from "react";
+import react, { useContext, useState } from "react";
+import userContext from './userContext.js'
 
 export default function Button({ label, theme }) {
+  const {isConnected, userName } = useContext(userContext);
+  let name = useState("")
+  if (isConnected == true) {
+    name = userName;
+  } else {
+    name = "unnamed";
+  };
 
   const requestToNode = async (label) => {
     try {
       alert("Commande envoyée");
-      const response = await fetch("http://localhost:1880/endpoint", {
+      const response = await fetch("http://193.252.185.148:17001/endpoint", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ data: label }),
+        body: JSON.stringify({ data: label, name }),
       });
 
       if (response.ok) {

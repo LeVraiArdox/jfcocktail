@@ -14,7 +14,7 @@ import UserContext from "./userContext";
 export default function LoginModal({ isVisible, onClose }) {
   const [userNameInput, setUserNameInput] = useState("");
   const [userPass, setUserPass] = useState("");
-  const { setUserName, setIsConnected } = useContext(UserContext)
+  const { setUserName, setIsConnected } = useContext(UserContext);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -5,14 +5,14 @@ import { useContext } from "react";
 export default function Header({ name }) {
   let date = new Date();
   let time = date.getHours() + ":" + date.getMinutes();
-  const {userName} = useContext(UserContext);
+  const {userName, isConnected} = useContext(UserContext);
 
   if (userName) name = userName;
 
   return (
     <View style={styles.container}>
       <Text style={styles.textHour}>{time}</Text>
-      <Text style={styles.textHeader}>Bienvenue, {name}</Text>
+      <Text style={styles.textHeader}>{isConnected ? "Bienvenue, " + name : "Déconnecté"}</Text>
     </View>
   );
 }
@@ -37,3 +37,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+

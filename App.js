@@ -9,20 +9,14 @@ import Header from "./components/header";
 import UserContext from "./components/userContext";
 export default function App() {
   const defaultName = "client inconnu";
-  const [showFav, setShowFav] = useState(false);
+  const isConnected = useContext(UserContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const onLogin = () => {
-    setIsModalVisible(true);
-  };
+  const onLogin = () => setIsModalVisible(true);
 
-  const onModalClose = () => {
-    setIsModalVisible(false);
-  };
+  const onModalClose = () => setIsModalVisible(false);
 
-  function toggleShowFav() {
-    setShowFav(!showFav);
-  }
+  console.log("connected ?", isConnected)
 
   return (
     <UserProvider>
@@ -32,7 +26,7 @@ export default function App() {
           <MaterialIcons name="login" size={38} color="#000" />
         </Pressable>
         <ScrollView contentContainerStyle={styles.butContainer}>
-          {showFav && <Button theme="favourite" label="Boisson préférée" />}
+          {isConnected && <Button theme="favourite" label="Boisson préférée" />}
           <Button theme="recommended" label="Boisson recommandée" />
           <Button theme="primary" label="Sunrise Splash" />
           <Button theme="primary" label="Tropical Breeze" />
@@ -82,3 +76,4 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
