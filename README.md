@@ -2,7 +2,7 @@
 
 JFCocktails is a simple application built using React Native and Expo that i made for my school project. It displays a list of beverages and allows the user to login.
 
-![Screenshot_20240318_121335_Expo Go](https://github.com/LeVraiArdox/jfcocktail/assets/110931544/d9eeb9ec-0227-4f38-adba-50b3eeeca7ce)
+<img src="https://github.com/LeVraiArdox/jfcocktail/assets/110931544/d9eeb9ec-0227-4f38-adba-50b3eeeca7ce" style="height: 600px;">
 
 ## Prerequisites
 
