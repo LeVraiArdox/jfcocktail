@@ -14,7 +14,8 @@ import UserContext from "./userContext";
 export default function LoginModal({ isVisible, onClose }) {
   const [userNameInput, setUserNameInput] = useState("");
   const [userPass, setUserPass] = useState("");
-  const { setUserName, setIsConnected } = useContext(UserContext);
+  const {favDrink} = useState([])
+  const { setUserName, setIsConnected, setFavDrink } = useContext(UserContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,10 +35,12 @@ export default function LoginModal({ isVisible, onClose }) {
     console.log("user: ", user);
     console.log("username: ", userNameInput);
     console.log("passwd: ", userPass);
+    console.log("fav drink:", user.favDrink);
 
     if (user !== undefined) {
       setIsConnected(true);
       setUserName(userNameInput);
+      setFavDrink(user.favDrink);
     } else {
       alert("User not found");
       setIsConnected(false);

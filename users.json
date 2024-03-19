@@ -2,16 +2,20 @@
     {
       "id": 1,
       "username": "ardox",
-      "password": "1234"
+      "password": "1234",
+      "favDrink": "Sunrise Splash"
     },
     {
       "id": 2,
       "username": "sytrix",
-      "password": "5678"
+      "password": "5678",
+      "favDrink": "Tropical Breeze"
+
     },
     {
       "id": 3,
       "username": "gauxd",
-      "password": "9876"
+      "password": "9876",
+      "favDrink": "Apple Pine Delight"
     }
   ]

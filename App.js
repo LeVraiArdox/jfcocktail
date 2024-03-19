@@ -7,16 +7,17 @@ import { UserProvider } from "./components/userContext";
 import Button from "./components/buttons";
 import Header from "./components/header";
 import UserContext from "./components/userContext";
+
 export default function App() {
   const defaultName = "client inconnu";
-  const isConnected = useContext(UserContext);
+  const isConnected = "true";
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const onLogin = () => setIsModalVisible(true);
 
   const onModalClose = () => setIsModalVisible(false);
 
-  console.log("connected ?", isConnected)
+  console.log("connected ?", isConnected);
 
   return (
     <UserProvider>
@@ -41,6 +42,7 @@ export default function App() {
     </UserProvider>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -76,4 +78,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-

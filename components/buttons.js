@@ -1,15 +1,34 @@
 import { StyleSheet, View, Pressable, Text } from "react-native";
-import react, { useContext, useState } from "react";
+import react, { useContext, useState, useEffect } from "react";
 import userContext from './userContext.js'
+import usersData from "../users.json";
+
 
 export default function Button({ label, theme }) {
   const {isConnected, userName } = useContext(userContext);
+  let {favDrink} = useContext(userContext);
   let name = useState("")
+
   if (isConnected == true) {
     name = userName;
   } else {
     name = "unnamed";
   };
+
+  if (!favDrink) {
+    favDrink = "Not Connected";
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedData = await fetch(usersData);
+      const jsonData = await fetchedData.json();
+      setUsers(jsonData);
+    };
+
+    fetchData();
+  }, []);
+
 
   const requestToNode = async (label) => {
     try {
@@ -94,11 +113,11 @@ export default function Button({ label, theme }) {
           <Pressable
             style={[styles.button, { backgroundColor: "#fff" }]}
             onPress={() =>
-              requestToNode(label) && setUsed(true) && alert("Commande envoyée")
+              requestToNode(favDrink) && setUsed(true) && alert("Commande envoyée")
             }
           >
             <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
-              {label}
+              {favDrink}
             </Text>
           </Pressable>
         </View>
