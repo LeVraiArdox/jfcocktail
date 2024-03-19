@@ -2,6 +2,8 @@
 
 JFCocktails is a simple application built using React Native and Expo that i made for my school project. It displays a list of beverages and allows the user to login.
 
+<img src="https://github.com/LeVraiArdox/jfcocktail/assets/110931544/d9eeb9ec-0227-4f38-adba-50b3eeeca7ce" style="height: 600px;">
+
 ## Prerequisites
 
 - Node.js installed
@@ -23,6 +25,8 @@ The main components of the app are:
 - `Button`: a custom button component
 
 The app uses the `useState` hook to manage the state of the application. The `isConnected` variable determines whether the "Favorite" button is displayed or not. The `isModalVisible` variable controls the visibility of the `LoginModal`.
+
+When a button is clicked, a signal is sent to node red with the payloas as the drink name. Be sure to replace with your own node red, else it will show a network error.
 
 ## Functions
 
