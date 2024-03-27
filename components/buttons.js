@@ -1,19 +1,18 @@
-import { StyleSheet, View, Pressable, Text } from "react-native";
+import { StyleSheet, View, Pressable, Text, Image } from "react-native";
 import react, { useContext, useState, useEffect } from "react";
-import userContext from './userContext.js'
+import userContext from "./userContext.js";
 import usersData from "../users.json";
 
-
 export default function Button({ label, theme }) {
-  const {isConnected, userName } = useContext(userContext);
-  let {favDrink} = useContext(userContext);
-  let name = useState("")
+  const { isConnected, userName } = useContext(userContext);
+  let { favDrink } = useContext(userContext);
+  let name = useState("");
 
   if (isConnected == true) {
     name = userName;
   } else {
     name = "unnamed";
-  };
+  }
 
   if (!favDrink) {
     favDrink = "Not Connected";
@@ -28,7 +27,6 @@ export default function Button({ label, theme }) {
 
     fetchData();
   }, []);
-
 
   const requestToNode = async (label) => {
     try {
@@ -65,6 +63,15 @@ export default function Button({ label, theme }) {
     "Tropical Cran-Apple",
   ];
 
+  const cocktailsImages = {
+    "Sunrise Splash": "../assets/cocktail1.jpg",
+    "Tropical Breeze": "../assets/cocktail1.jpg",
+    "Apple Pine Delight": "../assets/cocktail1.jpg",
+    "Cranberry Sunset": "../assets/cocktail1.jpg",
+    "Island Orchid": "../assets/cocktail1.jpg",
+    "Tropical Cran-Apple": "../assets/cocktail1.jpg",
+  };
+
   function getRandomDrink() {
     const randomIndex = Math.floor(Math.random() * drinks.length);
     return drinks[randomIndex];
@@ -90,6 +97,7 @@ export default function Button({ label, theme }) {
             style={[styles.button, { backgroundColor: "#fff" }]}
             onPress={() => requestToNode(label) && setUsed(true)}
           >
+
             <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
               {label}
             </Text>
@@ -113,7 +121,9 @@ export default function Button({ label, theme }) {
           <Pressable
             style={[styles.button, { backgroundColor: "#fff" }]}
             onPress={() =>
-              requestToNode(favDrink) && setUsed(true) && alert("Commande envoyée")
+              requestToNode(favDrink) &&
+              setUsed(true) &&
+              alert("Commande envoyée")
             }
           >
             <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
@@ -163,7 +173,7 @@ export default function Button({ label, theme }) {
         >
           <Pressable
             style={[styles.button, { backgroundColor: "#fff" }]}
-            onPress={() => alert("Une action est déja en cours")}
+            onPress={() => requestToNode(label) && setUsed(true)}
           >
             <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
               {label}
@@ -190,7 +200,7 @@ export default function Button({ label, theme }) {
             onPress={() => alert("Une action est déja en cours")}
           >
             <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
-              {label}
+              {favDrink}
             </Text>
           </Pressable>
         </View>
@@ -225,7 +235,7 @@ export default function Button({ label, theme }) {
 const styles = StyleSheet.create({
   buttonContainer: {
     width: 320,
-    height: 88,
+    height: 100,
     alignItems: "center",
     justifyContent: "center",
     padding: 3,
@@ -250,4 +260,5 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
   },
+
 });

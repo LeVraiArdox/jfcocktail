@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     color: "#000",
     alignSelf: "center",
     fontWeight: "bold",
+
   },
   textHour: {
     fontSize: 54,

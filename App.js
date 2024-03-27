@@ -7,15 +7,11 @@ import { UserProvider } from "./components/userContext";
 import Button from "./components/buttons";
 import Header from "./components/header";
 import UserContext from "./components/userContext";
+import Footer from "./components/footer";
 
 export default function App() {
   const defaultName = "client inconnu";
   const isConnected = "true";
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const onLogin = () => setIsModalVisible(true);
-
-  const onModalClose = () => setIsModalVisible(false);
 
   console.log("connected ?", isConnected);
 
@@ -23,9 +19,6 @@ export default function App() {
     <UserProvider>
       <View style={styles.container}>
         <Header name={defaultName} />
-        <Pressable style={styles.loginButton} onPress={onLogin}>
-          <MaterialIcons name="login" size={38} color="#000" />
-        </Pressable>
         <ScrollView contentContainerStyle={styles.butContainer}>
           {isConnected && <Button theme="favourite" label="Boisson préférée" />}
           <Button theme="recommended" label="Boisson recommandée" />
@@ -36,7 +29,7 @@ export default function App() {
           <Button theme="primary" label="Island Orchard" />
           <Button theme="primary" label="Tropical Cran-apple" />
         </ScrollView>
-        <LoginModal isVisible={isModalVisible} onClose={onModalClose} />
+        <Footer />
         <StatusBar style="hidden" translucent />
       </View>
     </UserProvider>
